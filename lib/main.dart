@@ -3,8 +3,8 @@ import 'package:try_shared_preferences/core/services/preferneces_manager.dart';
 import 'package:try_shared_preferences/core/theme/dark_theme.dart';
 import 'package:try_shared_preferences/core/theme/light_theme.dart';
 import 'package:try_shared_preferences/core/theme/theme_controller.dart';
-import 'package:try_shared_preferences/screens/main_bottom_navigation_bar.dart';
-import 'package:try_shared_preferences/screens/welcom_screen.dart';
+import 'package:try_shared_preferences/features/navigator/main_bottom_navigation_bar.dart';
+import 'package:try_shared_preferences/features/welcome/welcom_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

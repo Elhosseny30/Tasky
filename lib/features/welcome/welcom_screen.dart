@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:try_shared_preferences/core/services/preferneces_manager.dart';
 import 'package:try_shared_preferences/core/widgets/custom_svg_widget.dart';
 import 'package:try_shared_preferences/core/widgets/custom_text_form_field.dart';
-import 'package:try_shared_preferences/screens/Main_Bottom_Navigation_Bar.dart';
+import 'package:try_shared_preferences/features/navigator/main_bottom_navigation_bar.dart';
 
 class WelcomScreen extends StatelessWidget {
   WelcomScreen({super.key});

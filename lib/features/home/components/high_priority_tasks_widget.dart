@@ -4,7 +4,7 @@ import 'package:try_shared_preferences/core/theme/theme_controller.dart';
 import 'package:try_shared_preferences/core/widgets/custom_check_box%20.dart';
 import 'package:try_shared_preferences/core/widgets/custom_svg_widget.dart';
 import 'package:try_shared_preferences/models/task_model.dart';
-import 'package:try_shared_preferences/screens/high_priority_task.dart';
+import 'package:try_shared_preferences/features/tasks/high_priority_task.dart';
 
 class HighPriorityTasksWidget extends StatelessWidget {
   const HighPriorityTasksWidget({

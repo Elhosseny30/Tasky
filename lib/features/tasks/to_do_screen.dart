@@ -3,18 +3,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:try_shared_preferences/core/services/preferneces_manager.dart';
 import 'package:try_shared_preferences/models/task_model.dart';
-import 'package:try_shared_preferences/widgets/list_view_tasks.dart';
+import 'package:try_shared_preferences/core/components/list_view_tasks.dart';
 
-class CompletedScreen extends StatefulWidget {
-  const CompletedScreen({super.key});
+class ToDoScreen extends StatefulWidget {
+  const ToDoScreen({super.key});
 
   @override
-  State<CompletedScreen> createState() => _CompletedScreenState();
+  State<ToDoScreen> createState() => _ToDoScreenState();
 }
 
-class _CompletedScreenState extends State<CompletedScreen> {
+class _ToDoScreenState extends State<ToDoScreen> {
   List<TaskModel> allListTasks = [];
-  List<TaskModel> displayCompletedTasks = [];
+  List<TaskModel> displayToDoTasks = [];
 
   @override
   void initState() {
@@ -31,8 +31,8 @@ class _CompletedScreenState extends State<CompletedScreen> {
         allListTasks = tasksDecoded
             .map((element) => TaskModel.fromJson(element))
             .toList();
-        displayCompletedTasks = allListTasks
-            .where((element) => element.isChecked == true)
+        displayToDoTasks = allListTasks
+            .where((element) => element.isChecked == false)
             .toList();
       });
     }
@@ -47,21 +47,18 @@ class _CompletedScreenState extends State<CompletedScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Completed Tasks",
+              "To Do Tasks",
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             SizedBox(height: 18),
             Expanded(
               child: ListViewTasks(
-                onEdit: () {
-                  loadUserTasks();
-                },
+                message: "No Tasks to do",
+                tasksList: displayToDoTasks,
                 onDelete: (String value) async {
                   setState(() {
                     allListTasks.removeWhere((e) => e.taskName == value);
-                    displayCompletedTasks.removeWhere(
-                      (e) => e.taskName == value,
-                    );
+                    displayToDoTasks.removeWhere((e) => e.taskName == value);
                   });
                   final allTasksMapped = allListTasks
                       .map((e) => e.toMap())
@@ -71,22 +68,22 @@ class _CompletedScreenState extends State<CompletedScreen> {
                     jsonEncode(allTasksMapped),
                   );
                 },
-                message: "No Completed Tasks",
-                tasksList: displayCompletedTasks,
+                onEdit: () {
+                  loadUserTasks();
+                },
                 onTap: (bool? value, int? index) async {
-                  final taskTarget = displayCompletedTasks[index!].taskName;
+                  final targetIndex = displayToDoTasks[index!].taskName;
                   final newValue = value ?? false;
                   setState(() {
-                    displayCompletedTasks[index].isChecked = newValue;
-                    final targetIndex = allListTasks.indexWhere(
-                      (task) => task.taskName == taskTarget,
+                    displayToDoTasks[index].isChecked = newValue;
+                    final taskIndex = allListTasks.indexWhere(
+                      (task) => task.taskName == targetIndex,
                     );
 
-                    if (targetIndex != -1) {
-                      allListTasks[targetIndex].isChecked = newValue;
+                    if (taskIndex != -1) {
+                      allListTasks[taskIndex].isChecked = newValue;
                     }
-                    displayCompletedTasks.removeAt(index);
-                    //loadUserTasks();
+                    displayToDoTasks.removeAt(index);
                   });
                   final listJson = allListTasks
                       .map((element) => element.toMap())

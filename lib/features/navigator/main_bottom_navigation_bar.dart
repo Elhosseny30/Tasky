@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:try_shared_preferences/screens/completed_screen.dart';
-import 'package:try_shared_preferences/screens/home_screen.dart';
-import 'package:try_shared_preferences/screens/profile_screen.dart';
-import 'package:try_shared_preferences/screens/to_do_screen.dart';
+import 'package:try_shared_preferences/features/home/home_screen.dart';
+import 'package:try_shared_preferences/features/profile/profile_screen.dart';
+import 'package:try_shared_preferences/features/tasks/completed_screen.dart';
+import 'package:try_shared_preferences/features/tasks/to_do_screen.dart';
 
 class MainBottomNavigationBar extends StatefulWidget {
   const MainBottomNavigationBar({super.key});

@@ -7,8 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:try_shared_preferences/core/services/preferneces_manager.dart';
 import 'package:try_shared_preferences/core/theme/theme_controller.dart';
 import 'package:try_shared_preferences/core/widgets/custom_svg_widget.dart';
-import 'package:try_shared_preferences/screens/user_profile_details.dart';
-import 'package:try_shared_preferences/screens/welcom_screen.dart';
+import 'package:try_shared_preferences/features/profile/user_profile_details.dart';
+import 'package:try_shared_preferences/features/welcome/welcom_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

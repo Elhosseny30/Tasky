@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:try_shared_preferences/core/services/preferneces_manager.dart';
 import 'package:try_shared_preferences/core/widgets/custom_svg_widget.dart';
 import 'package:try_shared_preferences/models/task_model.dart';
-import 'package:try_shared_preferences/screens/add_task.dart';
-import 'package:try_shared_preferences/widgets/archived_widget.dart';
-import 'package:try_shared_preferences/widgets/high_priority_tasks_widget.dart';
-import 'package:try_shared_preferences/widgets/sliver_list_view_tasks.dart';
+import 'package:try_shared_preferences/features/add_task/add_task.dart';
+import 'package:try_shared_preferences/features/home/components/archived_widget.dart';
+import 'package:try_shared_preferences/features/home/components/high_priority_tasks_widget.dart';
+import 'package:try_shared_preferences/features/home/components/sliver_list_view_tasks.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

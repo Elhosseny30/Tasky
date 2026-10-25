@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:try_shared_preferences/core/services/preferneces_manager.dart';
 import 'package:try_shared_preferences/models/task_model.dart';
-import 'package:try_shared_preferences/widgets/list_view_tasks.dart';
+import 'package:try_shared_preferences/core/components/list_view_tasks.dart';
 
 class HighPriorityTask extends StatefulWidget {
   const HighPriorityTask({super.key});

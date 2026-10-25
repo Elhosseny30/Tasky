@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:try_shared_preferences/models/task_model.dart';
-import 'package:try_shared_preferences/widgets/custom_container_my_tasks.dart';
+import 'package:try_shared_preferences/features/home/components/custom_container_my_tasks.dart';
 
 class SliverListViewTasks extends StatelessWidget {
   const SliverListViewTasks({

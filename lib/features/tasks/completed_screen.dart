@@ -3,18 +3,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:try_shared_preferences/core/services/preferneces_manager.dart';
 import 'package:try_shared_preferences/models/task_model.dart';
-import 'package:try_shared_preferences/widgets/list_view_tasks.dart';
+import 'package:try_shared_preferences/core/components/list_view_tasks.dart';
 
-class ToDoScreen extends StatefulWidget {
-  const ToDoScreen({super.key});
+class CompletedScreen extends StatefulWidget {
+  const CompletedScreen({super.key});
 
   @override
-  State<ToDoScreen> createState() => _ToDoScreenState();
+  State<CompletedScreen> createState() => _CompletedScreenState();
 }
 
-class _ToDoScreenState extends State<ToDoScreen> {
+class _CompletedScreenState extends State<CompletedScreen> {
   List<TaskModel> allListTasks = [];
-  List<TaskModel> displayToDoTasks = [];
+  List<TaskModel> displayCompletedTasks = [];
 
   @override
   void initState() {
@@ -31,8 +31,8 @@ class _ToDoScreenState extends State<ToDoScreen> {
         allListTasks = tasksDecoded
             .map((element) => TaskModel.fromJson(element))
             .toList();
-        displayToDoTasks = allListTasks
-            .where((element) => element.isChecked == false)
+        displayCompletedTasks = allListTasks
+            .where((element) => element.isChecked == true)
             .toList();
       });
     }
@@ -47,18 +47,21 @@ class _ToDoScreenState extends State<ToDoScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "To Do Tasks",
+              "Completed Tasks",
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             SizedBox(height: 18),
             Expanded(
               child: ListViewTasks(
-                message: "No Tasks to do",
-                tasksList: displayToDoTasks,
+                onEdit: () {
+                  loadUserTasks();
+                },
                 onDelete: (String value) async {
                   setState(() {
                     allListTasks.removeWhere((e) => e.taskName == value);
-                    displayToDoTasks.removeWhere((e) => e.taskName == value);
+                    displayCompletedTasks.removeWhere(
+                      (e) => e.taskName == value,
+                    );
                   });
                   final allTasksMapped = allListTasks
                       .map((e) => e.toMap())
@@ -68,22 +71,22 @@ class _ToDoScreenState extends State<ToDoScreen> {
                     jsonEncode(allTasksMapped),
                   );
                 },
-                onEdit: () {
-                  loadUserTasks();
-                },
+                message: "No Completed Tasks",
+                tasksList: displayCompletedTasks,
                 onTap: (bool? value, int? index) async {
-                  final targetIndex = displayToDoTasks[index!].taskName;
+                  final taskTarget = displayCompletedTasks[index!].taskName;
                   final newValue = value ?? false;
                   setState(() {
-                    displayToDoTasks[index].isChecked = newValue;
-                    final taskIndex = allListTasks.indexWhere(
-                      (task) => task.taskName == targetIndex,
+                    displayCompletedTasks[index].isChecked = newValue;
+                    final targetIndex = allListTasks.indexWhere(
+                      (task) => task.taskName == taskTarget,
                     );
 
-                    if (taskIndex != -1) {
-                      allListTasks[taskIndex].isChecked = newValue;
+                    if (targetIndex != -1) {
+                      allListTasks[targetIndex].isChecked = newValue;
                     }
-                    displayToDoTasks.removeAt(index);
+                    displayCompletedTasks.removeAt(index);
+                    //loadUserTasks();
                   });
                   final listJson = allListTasks
                       .map((element) => element.toMap())
